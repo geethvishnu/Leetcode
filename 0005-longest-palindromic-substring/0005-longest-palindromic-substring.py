@@ -1,27 +1,20 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        n=len(s)
-        substring=[]
-        for i in range(n):
-            for j in range(i+1,n+1):
-                substring.append(s[i:j])
-        m=0
-        ls=''
+        def expand_around_center(left: int, right: int) -> str:
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return s[left + 1:right]
         
-        if len(substring)<2:
-            return substring[0]
-        if len(s)==2 and s[0]!=s[1]:
-            return s[0]
-        elif len(s)==2 and s[0]==s[1]:
-            return s
-        for i in substring:
-
-            if len(i)<2:
-                pass
-            
-            elif i[::-1]==i and m<len(i):
-                m=len(i)
-                ls=i
-      
-
-        return ls
+        longest = ""
+        for i in range(len(s)):
+            # Odd length palindromes
+            odd_palindrome = expand_around_center(i, i)
+            if len(odd_palindrome) > len(longest):
+                longest = odd_palindrome
+            # Even length palindromes
+            even_palindrome = expand_around_center(i, i + 1)
+            if len(even_palindrome) > len(longest):
+                longest = even_palindrome
+        
+        return longest
