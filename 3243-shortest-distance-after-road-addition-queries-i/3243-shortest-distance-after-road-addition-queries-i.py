@@ -1,8 +1,5 @@
 class Solution:
-    from collections import deque, defaultdict
-
-    def shortestPath(n, queries):
-        # Initial graph setup (direct roads from i to i+1)
+    def shortestDistanceAfterQueries(self, n: int, queries: List[List[int]]) -> List[int]:
         graph = defaultdict(list)
         for i in range(n - 1):
             graph[i].append(i + 1)
@@ -32,5 +29,4 @@ class Solution:
             answer.append(shortest_path_length)
         
         return answer
-
             
