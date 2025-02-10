@@ -1,8 +1,15 @@
 class Solution:
     def clearDigits(self, s: str) -> str:
-        # sub_str=""
-        # if len(s)<=1:
-        #     return s
+        sub_str=""
+        for i in range(len(s)):
+            if s[i].isdigit():
+                sub_str=sub_str[:-1]
+            else:
+                sub_str+=s[i]
+        return sub_str
+        
+
+
         st=[]
         for i in range(len(s)):
             if s[i].isdigit():
